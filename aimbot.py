@@ -7,7 +7,7 @@ import cv2
 import math
 import time
 
-detector = hub.load("https://tfhub.dev/tensorflow/centernet/resnet50v1_fpn_512x512/1")
+detector = hub.load("https://tfhub.dev/tensorflow/efficientdet/d4/1")
 size_scale = 3
 
 while True:
@@ -21,7 +21,7 @@ while True:
     ori_img = np.array(pyautogui.screenshot(region=region))
     ori_img = cv2.resize(ori_img, (ori_img.shape[1] // size_scale, ori_img.shape[0] // size_scale))
     image = np.expand_dims(ori_img, 0)
-    img_w, img_h = image.shape[2], image.shape[1]
+    img_w, img_h = image.shape[1], image.shape[3]
 
     # Detection
     result = detector(image)
